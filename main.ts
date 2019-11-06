@@ -20,8 +20,8 @@ namespace Fuzzy_sensor {
             let d = pins.pulseIn(DigitalPin.P15, PulseValue.High, 43200);
             list[i] = Math.floor(d / 40)
         }
-        list.sort();
-        let length = (list[1] + list[2] + list[3]) / 3;
+        //list.sort();
+       // let length = (list[1] + list[2] + list[3]) / 3;
         return Math.floor(length);
     }
 }
