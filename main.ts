@@ -16,7 +16,7 @@ namespace Fuzzy_sensor {
 
             // read pulse
             let d = pins.pulseIn(DigitalPin.P15, PulseValue.High, 23200);
-            return Math.floor((d+56) / 56);
+            return Math.floor((d+84) / 56);
         }
     }
      
