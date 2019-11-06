@@ -1,6 +1,6 @@
 //% color="#ED755E"
 namespace Fuzzy_sensor {
-    //% blockId=mbit_ultrasonic block="Distancia do sensor ultrasonico (cm) teste"
+    //% blockId=mbit_ultrasonic block="Distancia do sensor ultrasonico (cm) "
     //% weight=98
     //% blockGap=10
 
@@ -16,7 +16,7 @@ namespace Fuzzy_sensor {
 
         // read pulse
         let d = pins.pulseIn(DigitalPin.P15, PulseValue.High, 23200);
-        return Math.floor((d + 100) / 56);
+        return Math.floor((d + 112) / 56);
     }
 }
 
