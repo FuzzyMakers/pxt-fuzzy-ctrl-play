@@ -16,6 +16,6 @@ namespace Fuzzy_sensor {
             control.waitMicros(10);
             pins.digitalWritePin(DigitalPin.P14, 0);
             let d = pins.pulseIn(DigitalPin.P15, PulseValue.High, 20000);
-        return  Math.floor((d+56/28/2);
+        return  Math.floor((d+58)/28/2);
     }
 }
