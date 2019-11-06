@@ -5,21 +5,21 @@ namespace Fuzzy_sensor {
     //% blockGap=10
 
     export function Ultrasonic(): number {
-        
-            // send pulse
+
+        // send pulse
         pins.setPull(DigitalPin.P14, PinPullMode.PullNone);
         pins.digitalWritePin(DigitalPin.P14, 0);
-            control.waitMicros(2);
-            pins.digitalWritePin(DigitalPin.P14, 1);
-            control.waitMicros(10);
-            pins.digitalWritePin(DigitalPin.P14, 0);
+        control.waitMicros(2);
+        pins.digitalWritePin(DigitalPin.P14, 1);
+        control.waitMicros(10);
+        pins.digitalWritePin(DigitalPin.P14, 0);
 
-            // read pulse
-            let d = pins.pulseIn(DigitalPin.P15, PulseValue.High, 23200);
-            return Math.floor((d+84) / 56);
-        }
+        // read pulse
+        let d = pins.pulseIn(DigitalPin.P15, PulseValue.High, 23200);
+        return Math.floor((d + 84) / 56);
     }
-     
+}
+
 
 
    // send pulse
