@@ -21,7 +21,7 @@ namespace Fuzzy_sensor {
             list[i] = Math.floor(d / 40)
         }
         //list.sort();
-       // let length = (list[1] + list[2] + list[3]) / 3;
+        let length = (list[1] + list[2] + list[3]+ list[4]+ list[5]) / 3;
         return Math.floor(length);
     }
 }
