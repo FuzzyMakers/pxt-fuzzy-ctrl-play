@@ -30,7 +30,7 @@ namespace Fuzzy_sensor {
         let d = pins.pulseIn(DigitalPin.P15, PulseValue.High, 23200);
         return Math.floor((d + 112) / 56);
     }
-}
+
 
 /**
      * get dht11 temperature and humidity Value
@@ -89,4 +89,5 @@ export function dht11value(dht11type: DHT11Type, dht11pin: DigitalPin): number {
         default:
             return 0;
     }
+}
 }
