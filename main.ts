@@ -32,8 +32,9 @@ namespace Fuzzy_sensor {
     }
 }
 
-
-
+/**
+     * get dht11 temperature and humidity Value
+     * @param dht11pin describe parameter here, eg: DigitalPin.P15     */
 //% blockId="readdht11" block="Valor do sensor de temeperatura e umidade %dht11type| no pino %dht11pin"
 //% weight=98
 //% blockGap=10
