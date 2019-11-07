@@ -35,6 +35,10 @@ namespace Fuzzy_sensor {
 
 
 //% blockId="readdht11" block="Valor do sensor de temeperatura e umidade %dht11type| no pino %dht11pin"
+//% weight=98
+//% blockGap=10
+
+
 export function dht11value(dht11type: DHT11Type, dht11pin: DigitalPin): number {
 
     pins.digitalWritePin(dht11pin, 0)
