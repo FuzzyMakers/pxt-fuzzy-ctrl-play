@@ -3,7 +3,8 @@
     "version": "0.0.0",
     "description": "",
     "dependencies": {
-        "core": "*"
+        "core": "*",
+        "pxt-muselab": "github:muselab/pxt-wifi-shield#v1.8.47"
     },
     "files": [
         "README.md",
