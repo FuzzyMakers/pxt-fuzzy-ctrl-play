@@ -1,4 +1,4 @@
-//% color="#ED755E"
+//% color="#ED755E" icon="\f518"
 namespace Fuzzy_sensor {
 
 
