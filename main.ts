@@ -88,34 +88,4 @@ namespace Fuzzy_sensor {
                 return 0;
         }
     }
-    //% blockId="OLEDfuzzy" block="Inicia OLED com largura %larg| e altura %alt "
-    //% weight=87
-    export function IniciaOLED(alt: number, larg: number): void {
-
-
-        OLED.init(64, 128)
-    }
-
-    //% blockId="MostrarString" block="Mostrar string %String "
-    //% weight=87
-    export function MostrarString(String: string): void {
-
-        OLED.showStringWithNewLine(String)
-
-    }
-    //% blockId="Mostrarnumero" block=" Mostrar numero %Numero "
-    //% weight=80
-    export function Mostrarnumero(Numero: number): void {
-
-        OLED.showNumberWithNewLine(Numero)
-
-    }
-    //% blockId="LimparTela" block=" Limpar a tela "
-    //% weight=80
-    export function LimpaTela(): void {
-
-        OLED.clear()
-
-    }
-
 }
