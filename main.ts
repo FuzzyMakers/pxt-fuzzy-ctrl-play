@@ -1,5 +1,5 @@
 //% color="#ED755E" icon="\f518"
-namespace Fuzzy_sensor {
+namespace Fuzzysensor {
 
 
     export enum DHT11Type {
