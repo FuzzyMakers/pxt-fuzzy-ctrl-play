@@ -91,25 +91,31 @@ namespace Fuzzy_sensor {
     //% blockId="OLEDfuzzy" block="Inicia OLED com largura %larg| e altura %alt "
     //% weight=87
     export function IniciaOLED(alt: number, larg: number): void {
-        MuseOLED.init(alt, larg)
+
+
+        OLED.init(64, 128)
     }
 
     //% blockId="MostrarString" block="Mostrar string %String "
     //% weight=87
     export function MostrarString(String: string): void {
-        MuseOLED.showString(String)
+
+        OLED.showStringWithNewLine(String)
+
     }
     //% blockId="Mostrarnumero" block=" Mostrar numero %Numero "
     //% weight=80
     export function Mostrarnumero(Numero: number): void {
-        MuseOLED.showNumber(Numero)
+
+        OLED.showNumberWithNewLine(Numero)
+
     }
     //% blockId="LimparTela" block=" Limpar a tela "
     //% weight=80
     export function LimpaTela(): void {
-        MuseOLED.clear()
+
+        OLED.clear()
+
     }
-
-
 
 }

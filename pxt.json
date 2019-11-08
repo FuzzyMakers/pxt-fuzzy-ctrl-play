@@ -4,11 +4,12 @@
     "description": "",
     "dependencies": {
         "core": "*",
-        "pxt-muselab": "github:muselab/pxt-wifi-shield#v1.8.47"
+        "pxt-oled": "workspace:09316ee8-beee-4bf6-4dae-e214e0625aa6"
     },
     "files": [
         "README.md",
-        "main.ts"
+        "main.ts",
+        "teste.ts"
     ],
     "testFiles": [
         "test.ts"
