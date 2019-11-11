@@ -3,14 +3,14 @@ namespace Fuzzysensor {
 
 
     export enum DHT11Type {
-        //% block="temperature(℃)" enumval=0
+        //% block="temperatura(℃)" enumval=0
         DHT11_temperature_C,
 
-        //% block="humidity(0~100)" enumval=1
+        //% block="umidade(0~100)" enumval=1
         DHT11_humidity,
     }
 
-    //% blockId=mbit_ultrasonic block="Distancia do sensor ultrasonico (cm) "
+    //% blockId=mbit_ultrasonic block="Distância do sensor ultrasônico (cm) "
     //% weight=98
     //% blockGap=10
 
@@ -88,5 +88,5 @@ namespace Fuzzysensor {
                 return 0;
         }
     }
-  
+
 }
