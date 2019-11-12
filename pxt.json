@@ -4,7 +4,7 @@
     "description": "",
     "dependencies": {
         "core": "*",
-        "pxt-oled": "workspace:09316ee8-beee-4bf6-4dae-e214e0625aa6"
+        "pxt-oled": "github:FuzzyMakers/pxt-OLED"
     },
     "files": [
         "README.md",

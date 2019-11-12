@@ -1,8 +1,13 @@
+
 //% color="#ED755E"
 namespace Fuzzy_sensor {
     export enum Distance_Unit {
         //% block="ms" enumval=0
         Distance_Unit_mm,
+
+//% color="#ED755E" icon="\f518"
+namespace Fuzzysensor {
+
 
         //% block="cm" enumval=1
         Distance_Unit_cm,
@@ -12,6 +17,7 @@ namespace Fuzzy_sensor {
         //% block="temperatura(℃)" enumval=0
         DHT11_temperature_C,
 
+ pr-b4df8feb
         //% block="umidade (0~100)" enumval=1
         DHT11_humidity,
     }
@@ -54,6 +60,13 @@ namespace Fuzzy_sensor {
     }
 
     //% blockId=mbit_ultrasonic block="Sensor ultrasonico % (cm) "
+
+        //% block="umidade(0~100)" enumval=1
+        DHT11_humidity,
+    }
+
+    //% blockId=mbit_ultrasonic block="Distância do sensor ultrasônico (cm) "
+
     //% weight=98
     //% blockGap=10
 
@@ -133,4 +146,8 @@ namespace Fuzzy_sensor {
     }
 
 
+
 }
+=======
+}
+
