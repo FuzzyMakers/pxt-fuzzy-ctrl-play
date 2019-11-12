@@ -1,16 +1,59 @@
 //% color="#ED755E"
 namespace Fuzzy_sensor {
+    export enum Distance_Unit {
+        //% block="ms" enumval=0
+        Distance_Unit_mm,
 
+        //% block="cm" enumval=1
+        Distance_Unit_cm,
+    }
 
     export enum DHT11Type {
-        //% block="temperature(℃)" enumval=0
+        //% block="temperatura(℃)" enumval=0
         DHT11_temperature_C,
 
-        //% block="humidity(0~100)" enumval=1
+        //% block="umidade (0~100)" enumval=1
         DHT11_humidity,
     }
 
-    //% blockId=mbit_ultrasonic block="Distancia do sensor ultrasonico (cm) "
+    /**
+     * get Ultrasonic(sonar:bit) distance
+     * @param distance_unit describe parameter here, eg: 1
+     * @param pin describe parameter here, eg: DigitalPin.P16
+     */
+    //% blockId=readsonarbit block="Sonar trigger %trigpin|echo %echopin|distância em %distpin"
+    //% weight = 10
+    export function sonarbit_distance(dista: Distance_Unit, trigpin: DigitalPin,echopin: DigitalPin): number {
+
+        // send pulse
+        pins.setPull(trigpin, PinPullMode.PullNone)
+        pins.digitalWritePin(trigpin, 0)
+        control.waitMicros(2)
+        pins.digitalWritePin(trigpin, 1)
+        control.waitMicros(10)
+        pins.digitalWritePin(trigpin, 0)
+
+        // read pulse
+        let d = pins.pulseIn(echopin, PulseValue.High, 23000)  // 8 / 340 = 
+        let distance = d * 10 * 5 / 3 / 58
+
+        if (distance > 4000) distance = 0
+
+        switch (distance_unit) {
+            case 0:
+                return Math.round(d) //ms
+                break
+            case 1:
+                return Math.round(distance / 10)  //cm
+                break
+            default:
+                return 0
+
+        }
+
+    }
+
+    //% blockId=mbit_ultrasonic block="Sensor ultrasonico % (cm) "
     //% weight=98
     //% blockGap=10
 
@@ -33,7 +76,7 @@ namespace Fuzzy_sensor {
     /**
          * get dht11 temperature and humidity Value
          * @param dht11pin describe parameter here, eg: DigitalPin.P15     */
-    //% blockId="readdht11" block="Valor do sensor de temeperatura e umidade %dht11type| no pino %dht11pin"
+    //% blockId="readdht11" block="Valor do sensor de temperatura e umidade %dht11type| no pino %dht11pin"
     //% weight=98
     //% blockGap=10
 
@@ -88,34 +131,6 @@ namespace Fuzzy_sensor {
                 return 0;
         }
     }
-    //% blockId="OLEDfuzzy" block="Inicia OLED com largura %larg| e altura %alt "
-    //% weight=87
-    export function IniciaOLED(alt: number, larg: number): void {
 
-
-        OLED.init(64, 128)
-    }
-
-    //% blockId="MostrarString" block="Mostrar string %String "
-    //% weight=87
-    export function MostrarString(String: string): void {
-
-        OLED.showStringWithNewLine(String)
-
-    }
-    //% blockId="Mostrarnumero" block=" Mostrar numero %Numero "
-    //% weight=80
-    export function Mostrarnumero(Numero: number): void {
-
-        OLED.showNumberWithNewLine(Numero)
-
-    }
-    //% blockId="LimparTela" block=" Limpar a tela "
-    //% weight=80
-    export function LimpaTela(): void {
-
-        OLED.clear()
-
-    }
 
 }
