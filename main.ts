@@ -1,16 +1,72 @@
+
+//% color="#ED755E"
+namespace Fuzzy_sensor {
+    export enum Distance_Unit {
+        //% block="ms" enumval=0
+        Distance_Unit_mm,
+
 //% color="#ED755E" icon="\f518"
 namespace Fuzzysensor {
 
 
+        //% block="cm" enumval=1
+        Distance_Unit_cm,
+    }
+
     export enum DHT11Type {
         //% block="temperatura(℃)" enumval=0
         DHT11_temperature_C,
+
+ pr-b4df8feb
+        //% block="umidade (0~100)" enumval=1
+        DHT11_humidity,
+    }
+
+    /**
+     * get Ultrasonic(sonar:bit) distance
+     * @param distance_unit describe parameter here, eg: 1
+     * @param pin describe parameter here, eg: DigitalPin.P16
+     */
+    //% blockId=readsonarbit block="Sonar trigger %trigpin|echo %echopin|distância em %distpin"
+    //% weight = 10
+    export function sonarbit_distance(dista: Distance_Unit, trigpin: DigitalPin,echopin: DigitalPin): number {
+
+        // send pulse
+        pins.setPull(trigpin, PinPullMode.PullNone)
+        pins.digitalWritePin(trigpin, 0)
+        control.waitMicros(2)
+        pins.digitalWritePin(trigpin, 1)
+        control.waitMicros(10)
+        pins.digitalWritePin(trigpin, 0)
+
+        // read pulse
+        let d = pins.pulseIn(echopin, PulseValue.High, 23000)  // 8 / 340 = 
+        let distance = d * 10 * 5 / 3 / 58
+
+        if (distance > 4000) distance = 0
+
+        switch (distance_unit) {
+            case 0:
+                return Math.round(d) //ms
+                break
+            case 1:
+                return Math.round(distance / 10)  //cm
+                break
+            default:
+                return 0
+
+        }
+
+    }
+
+    //% blockId=mbit_ultrasonic block="Sensor ultrasonico % (cm) "
 
         //% block="umidade(0~100)" enumval=1
         DHT11_humidity,
     }
 
     //% blockId=mbit_ultrasonic block="Distância do sensor ultrasônico (cm) "
+
     //% weight=98
     //% blockGap=10
 
@@ -89,4 +145,9 @@ namespace Fuzzysensor {
         }
     }
 
+
+
 }
+=======
+}
+
