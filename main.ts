@@ -1,14 +1,10 @@
 
-//% color="#ED755E"
+//% color="#ED755E" icon="\f518"
 namespace Fuzzy_sensor {
+ 
     export enum Distance_Unit {
         //% block="ms" enumval=0
-        Distance_Unit_mm,
-
-//% color="#ED755E" icon="\f518"
-namespace Fuzzysensor {
-
-
+        Distance_Unit_ms,
         //% block="cm" enumval=1
         Distance_Unit_cm,
     }
@@ -16,8 +12,6 @@ namespace Fuzzysensor {
     export enum DHT11Type {
         //% block="temperatura(℃)" enumval=0
         DHT11_temperature_C,
-
- pr-b4df8feb
         //% block="umidade (0~100)" enumval=1
         DHT11_humidity,
     }
@@ -27,9 +21,9 @@ namespace Fuzzysensor {
      * @param distance_unit describe parameter here, eg: 1
      * @param pin describe parameter here, eg: DigitalPin.P16
      */
-    //% blockId=readsonarbit block="Sonar trigger %trigpin|echo %echopin|distância em %distpin"
+    //% blockId=leiturasonar block="Sonar trigger %trigpin|echo %echopin|distância em %distpin"
     //% weight = 10
-    export function sonarbit_distance(dista: Distance_Unit, trigpin: DigitalPin,echopin: DigitalPin): number {
+    export function sonar(distance_unit: Distance_Unit, trigpin: DigitalPin,echopin: DigitalPin): number {
 
         // send pulse
         pins.setPull(trigpin, PinPullMode.PullNone)
@@ -59,17 +53,9 @@ namespace Fuzzysensor {
 
     }
 
-    //% blockId=mbit_ultrasonic block="Sensor ultrasonico % (cm) "
-
-        //% block="umidade(0~100)" enumval=1
-        DHT11_humidity,
-    }
-
     //% blockId=mbit_ultrasonic block="Distância do sensor ultrasônico (cm) "
-
     //% weight=98
     //% blockGap=10
-
     export function Ultrasonic(): number {
 
         // send pulse
@@ -147,7 +133,5 @@ namespace Fuzzysensor {
 
 
 
-}
-=======
 }
 
