@@ -1,7 +1,7 @@
 
 //% color="#ED755E" icon="\f518"
 namespace Fuzzy_sensor {
- 
+
     export enum Distance_Unit {
         //% block="ms" enumval=0
         Distance_Unit_ms,
@@ -18,12 +18,13 @@ namespace Fuzzy_sensor {
 
     /**
      * get Ultrasonic(sonar:bit) distance
-     * @param distance_unit describe parameter here, eg: 1
-     * @param pin describe parameter here, eg: DigitalPin.P16
+     * @param distpin describe parameter here, eg: 1
+     * @param trigpin describe parameter here, eg: DigitalPin.P14
+     * @param echopin describe parameter here, eg: DigitalPin.P15
      */
     //% blockId=leiturasonar block="Sonar trigger %trigpin|echo %echopin|distância em %distpin"
     //% weight = 10
-    export function sonar(distance_unit: Distance_Unit, trigpin: DigitalPin,echopin: DigitalPin): number {
+    export function sonar(trigpin: DigitalPin, echopin: DigitalPin, distpin: Distance_Unit): number {
 
         // send pulse
         pins.setPull(trigpin, PinPullMode.PullNone)
@@ -39,7 +40,7 @@ namespace Fuzzy_sensor {
 
         if (distance > 4000) distance = 0
 
-        switch (distance_unit) {
+        switch (distpin) {
             case 0:
                 return Math.round(d) //ms
                 break
