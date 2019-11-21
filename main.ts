@@ -154,7 +154,7 @@ namespace Fuzzy_sensor {
         * @param Deg1  descreve qual angulo o servo esta, eg: 0
         */
     //% blockId=servomotorpos block="Mover o servo motor na porta %servopin| de %Deg1|° para %Deg|° com ajuste de tempo %Temp| ms"
-    //% weight = 10
+    //% weight = 32
     export function Servopos(servopin: AnalogPin, Deg1: number, Deg: number, Temp: number): void {
         let i;
         if(Deg1<Deg){
@@ -167,7 +167,6 @@ namespace Fuzzy_sensor {
             for (let i = Deg1; i < Deg; i--) {
                 pins.servoWritePin(servopin, i)
                 basic.pause(Temp)
-
             }
         }
     }
