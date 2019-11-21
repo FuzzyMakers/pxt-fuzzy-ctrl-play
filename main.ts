@@ -137,13 +137,40 @@ namespace Fuzzy_sensor {
         * @param Deg descreve qual angulo o servo irá, eg: 180
         * @param Temp descreve qual o tempo para cada degrau por segundo, eg: 100
         */
-    //% blockId=servomotorpin block="Servo na porta %servopin| para %Deg| graus com ajuste de tempo %Temp| ms"
+    //% blockId=servomotorpin block="Servo grava na porta %servopin| para %Deg| graus com ajuste de tempo %Temp| ms"
     //% weight = 12
     export function Servo(servopin: AnalogPin, Deg: number, Temp: number): void {
-        for (let i = 0; i < Deg; i++) {
+        let i;
+        for (let i=0; i < Deg; i++) {
             pins.servoWritePin(servopin, i)
             basic.pause(Temp)
         }
     }
+    /**
+        * get Ultrasonic(sonar:bit) distance
+        * @param servopin descreve qual porta o servomotor estar, eg: DigitalPin.P12
+        * @param Deg descreve qual angulo o servo irá, eg: 180
+        * @param Temp descreve qual o tempo para cada degrau por segundo, eg: 100
+        * @param Deg1  descreve qual angulo o servo esta, eg: 0
+        */
+    //% blockId=servomotorpos block="Mover o servo motor na porta %servopin| de %Deg1| para %Deg| graus com ajuste de tempo %Temp| ms"
+    //% weight = 12
+    export function Servopos(servopin: AnalogPin, Deg1: number, Deg: number, Temp: number): void {
+        let i;
+        if(Deg1<Deg){
+            for (let i=Deg1; i < Deg; i++) {
+            pins.servoWritePin(servopin, i)
+            basic.pause(Temp)
+            }
+        } 
+        else {
+            for (let i = Deg1; i < Deg; i--) {
+                pins.servoWritePin(servopin, i)
+                basic.pause(Temp)
+
+            }
+        }
+    }
 }
+
 
