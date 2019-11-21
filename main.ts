@@ -137,13 +137,12 @@ namespace Fuzzy_sensor {
         * @param Deg descreve qual angulo o servo irá, eg: 180
         * @param Temp descreve qual o tempo para cada degrau por segundo, eg: 100
         */
-    //% blockId=servomotorpin block="Servo na porta %servopin|para %Deg|graus em %Temp"
-    //% weight = 10
-    export function Servo(servopin: AnalogPin, Deg: number, Temp:number ): void
-    {
+    //% blockId=servomotorpin block="Servo na porta %servopin| para %Deg| graus com ajuste de tempo %Temp| ms"
+    //% weight = 12
+    export function Servo(servopin: AnalogPin, Deg: number, Temp: number): void {
         for (let i = 0; i < Deg; i++) {
-        pins.servoWritePin(servopin, i)
-        basic.pause(Temp)
+            pins.servoWritePin(servopin, i)
+            basic.pause(Temp)
         }
     }
 }
