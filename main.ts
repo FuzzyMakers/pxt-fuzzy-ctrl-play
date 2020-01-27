@@ -87,6 +87,7 @@ namespace Fuzzy_sensor {
         basic.pause(18)
         //let i = pins.digitalReadPin(dht11pin)
         pins.setPull(dht11pin, PinPullMode.PullUp);
+        basic.pause(2000)
         switch (dht11type) {
             case 0:
                 let dhtvalue1 = 0;
