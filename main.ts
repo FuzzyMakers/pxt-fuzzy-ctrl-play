@@ -85,7 +85,7 @@ namespace Fuzzy_sensor {
 
         pins.digitalWritePin(dht11pin, 0)
         basic.pause(18)
-        let i = pins.digitalReadPin(dht11pin)
+        //let i = pins.digitalReadPin(dht11pin)
         pins.setPull(dht11pin, PinPullMode.PullUp);
         switch (dht11type) {
             case 0:
@@ -141,7 +141,7 @@ namespace Fuzzy_sensor {
     //% weight = 12
     export function Servo(servopin: AnalogPin, Deg: number, Temp: number): void {
         let i;
-        for (let i=0; i < Deg; i++) {
+        for (let i = 0; i < Deg; i++) {
             pins.servoWritePin(servopin, i)
             basic.pause(Temp)
         }
@@ -157,12 +157,12 @@ namespace Fuzzy_sensor {
     //% weight = 10
     export function Servopos(servopin: AnalogPin, Deg1: number, Deg: number, Temp: number): void {
         let i;
-        if(Deg1<Deg){
-            for (let i=Deg1; i < Deg; i++) {
-            pins.servoWritePin(servopin, i)
-            basic.pause(Temp)
+        if (Deg1 < Deg) {
+            for (let i = Deg1; i < Deg; i++) {
+                pins.servoWritePin(servopin, i)
+                basic.pause(Temp)
             }
-        } 
+        }
         else {
             for (let i = Deg1; i > Deg; i--) {
                 pins.servoWritePin(servopin, i)
