@@ -82,54 +82,45 @@ namespace Fuzzy_sensor {
 
 
     export function dht11value(dht11type: DHT11Type, dht11pin: DigitalPin): number {
+        pins.digitalWritePin(DigitalPin.P0, 1)
+        let buf: boolean[]
+        let bufint: number[]
+        let j
+        for (let index = 0; index < 40; index++) buf.push(false)
+        for (let index = 0; index < 5; index++) resultArray.push(0)
+        let i
+        for(;;){
+            
+            pins.digitalWritePin(DigitalPin.P0, 0)
+            basic.pause(1)
+            pins.digitalReadPin(DigitalPin.P0)
+            for(let i:number=1;i>200;i++)
+            {
+            if (pins.digitalReadPin(DigitalPin.P0)==0) continue;
+            }
 
-        pins.digitalWritePin(dht11pin, 0)
-        basic.pause(18)
-        //let i = pins.digitalReadPin(dht11pin)
-        pins.setPull(dht11pin, PinPullMode.PullUp);
-        basic.pause(2000)
-        switch (dht11type) {
-            case 0:
-                let dhtvalue1 = 0;
-                let dhtcounter1 = 0;
-                while (pins.digitalReadPin(dht11pin) == 1);
-                while (pins.digitalReadPin(dht11pin) == 0);
-                while (pins.digitalReadPin(dht11pin) == 1);
-                for (let i = 0; i <= 32 - 1; i++) {
-                    while (pins.digitalReadPin(dht11pin) == 0);
-                    dhtcounter1 = 0
-                    while (pins.digitalReadPin(dht11pin) == 1) {
-                        dhtcounter1 += 1;
-                    }
-                    if (i > 15) {
-                        if (dhtcounter1 > 2) {
-                            dhtvalue1 = dhtvalue1 + (1 << (31 - i));
-                        }
-                    }
+            for(let j=0;j<41;j++){
+                for(let i:number = 1;i<200; i++){
+                if (pins.digitalReadPin(DigitalPin.P0)== 1) continue;
+            }
+
+                for (let i:number = 1; i<200; i++) {
+                    if (pins.digitalReadPin(DigitalPin.P0) == 0) continue;
                 }
-                return ((dhtvalue1 & 0x0000ff00) >> 8);
-                break;
-            case 1:
-                while (pins.digitalReadPin(dht11pin) == 1);
-                while (pins.digitalReadPin(dht11pin) == 0);
-                while (pins.digitalReadPin(dht11pin) == 1);
+                buf.push(false)
+                if(i>11)buf[j]=1
+            }
+            for (let index = 0; index < 5; index++)
+                for (let index2 = 0; index2 < 8; index2++)
+                    if (buf[8 * index + index2]) bufint[index] += 2 ** (7 - index2)
 
-                let value = 0;
-                let counter = 0;
-
-                for (let i = 0; i <= 8 - 1; i++) {
-                    while (pins.digitalReadPin(dht11pin) == 0);
-                    counter = 0
-                    while (pins.digitalReadPin(dht11pin) == 1) {
-                        counter += 1;
-                    }
-                    if (counter > 3) {
-                        value = value + (1 << (7 - i));
-                    }
-                }
-                return value;
-            default:
-                return 0;
+            //verify checksum
+            checksumTmp = resultArray[0] + resultArray[1] + resultArray[2] + resultArray[3]
+            checksum = resultArray[4]
+            if (checksumTmp >= 512) checksumTmp -= 512
+            if (checksumTmp >= 256) checksumTmp -= 256
+            if (checksum == checksumTmp) _readSuccessful = true
+                  
         }
     }
     /**
