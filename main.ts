@@ -9,11 +9,11 @@ namespace Fuzzy_sensor {
         Distance_Unit_cm,
     }
 
-    export enum DHT11Type {
-        //% block="temperatura(℃)" enumval=0
-        DHT11_temperature_C,
-        //% block="umidade (0~100)" enumval=1
-        DHT11_humidity,
+    enum dataType {
+        //% block="humidity"
+        humidity,
+        //% block="temperature"
+        Temperature,
     }
 
     /**
@@ -81,47 +81,64 @@ namespace Fuzzy_sensor {
     //% blockGap=10
 
 
-    export function dht11value(dht11type: DHT11Type, dht11pin: DigitalPin): number {
-        pins.digitalWritePin(DigitalPin.P0, 1)
+    export function dht11value( data: dataType, dht11pin: DigitalPin): number {
+        pins.digitalWritePin(dht11pin, 1)
+        let _readSuccessful: boolean = false
         let buf: boolean[]
         let bufint: number[]
-        let j
+        let checksum: number = 0
+        let checksumTmp: number = 0
+        _readSuccessful = false
+        let j:number=0
         for (let index = 0; index < 40; index++) buf.push(false)
-        for (let index = 0; index < 5; index++) resultArray.push(0)
-        let i
+        for (let index = 0; index < 5; index++) bufint.push(0)
+        let i:number=0
+        let _temperature: number = 0.0
+        let _humidity: number = 0.0
         for(;;){
             
-            pins.digitalWritePin(DigitalPin.P0, 0)
+            pins.digitalWritePin(dht11pin, 0)
             basic.pause(1)
-            pins.digitalReadPin(DigitalPin.P0)
+            pins.digitalReadPin(dht11pin)
             for(let i:number=1;i>200;i++)
             {
-            if (pins.digitalReadPin(DigitalPin.P0)==0) continue;
+            if (pins.digitalReadPin(dht11pin)==0) continue;
             }
 
             for(let j=0;j<41;j++){
                 for(let i:number = 1;i<200; i++){
-                if (pins.digitalReadPin(DigitalPin.P0)== 1) continue;
+                if (pins.digitalReadPin(dht11pin)== 1) continue;
             }
 
                 for (let i:number = 1; i<200; i++) {
-                    if (pins.digitalReadPin(DigitalPin.P0) == 0) continue;
+                    if (pins.digitalReadPin(dht11pin) == 0) continue;
                 }
                 buf.push(false)
-                if(i>11)buf[j]=1
+                if(i>11)buf.push(false)
             }
             for (let index = 0; index < 5; index++)
                 for (let index2 = 0; index2 < 8; index2++)
                     if (buf[8 * index + index2]) bufint[index] += 2 ** (7 - index2)
 
             //verify checksum
-            checksumTmp = resultArray[0] + resultArray[1] + resultArray[2] + resultArray[3]
-            checksum = resultArray[4]
+            checksumTmp = bufint[0] + bufint[1] + bufint[2] + bufint[3]
+            checksum = bufint[4]
             if (checksumTmp >= 512) checksumTmp -= 512
             if (checksumTmp >= 256) checksumTmp -= 256
             if (checksum == checksumTmp) _readSuccessful = true
+
+            //read data if checksum ok
+            if (_readSuccessful) {
+                
+                    _humidity = bufint[0] + bufint[1] / 100
+                    _temperature = bufint[2] + bufint[3] / 100
+        
+         if (_readSuccessful) return data == dataType.humidity ? _humidity : _temperature
+                    else return -999 
+                  
                   
         }
+        }  
     }
     /**
         * get Ultrasonic(sonar:bit) distance
